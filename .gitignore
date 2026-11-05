@@ -1,0 +1,10 @@
+# Ignorar el archivo de música original de más de 100 MB para que GitHub no rechace el push
+musica_original.mp3
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+
+# Archivos temporales del sistema
+Thumbs.db
+.DS_Store

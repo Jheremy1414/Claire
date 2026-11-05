@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title id="pageTitle">¡Baby Shower de Claire! 🍼✨</title>
+
+  <!-- Google Fonts: Fredoka & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            title: ['Fredoka', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            jungle: {
+              darkest: '#051A10',
+              deep: '#0B2C1C',
+              forest: '#14532D',
+              emerald: '#15803D',
+              leaf: '#22C55E',
+              lime: '#4ADE80',
+              light: '#DCFCE7',
+              woodDark: '#451A03',
+              wood: '#78350F',
+              woodGold: '#D97706',
+              woodLight: '#F59E0B',
+              parchment: '#FFFDF5',
+              parchmentGold: '#FEF9C3',
+              sun: '#FACC15',
+              pink: '#FB7185',
+              hibiscus: '#E11D48',
+              sky: '#38BDF8'
+            },
+            baby: {
+              pink: '#FDE2E4',
+              rose: '#FFCAD4',
+              accent: '#FB6F92',
+              cream: '#FFF9F4',
+              yellow: '#FEF9E7',
+              mint: '#E8F5E9',
+              lavender: '#E8E8FF',
+              blue: '#E0F2FE',
+            }
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.05)' },
+            }
+          },
+          animation: {
+            float: 'float 4s ease-in-out infinite',
+            'float-delayed': 'float 4s ease-in-out 2s infinite',
+            pulseSubtle: 'pulseSubtle 2.5s ease-in-out infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Supabase CDN Oficial -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    /* Fondo Temático: Selva Tropical de El Libro de la Selva */
+    body {
+      background: radial-gradient(circle at 50% 12%, #388E3C 0%, #1B5E39 35%, #0B2C1C 75%, #051A10 100%);
+      background-attachment: fixed;
+      color: #1F2937;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Tarjetas estilo Pergamino Selvático con Marco de Madera y Oro */
+    .glass-card {
+      background: linear-gradient(180deg, rgba(255, 254, 247, 0.96) 0%, rgba(254, 250, 238, 0.94) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 3.5px solid #F59E0B;
+      border-radius: 1.75rem;
+      box-shadow: 0 20px 45px -10px rgba(5, 26, 16, 0.45), 0 0 0 1px rgba(251, 191, 36, 0.35);
+    }
+
+    /* Tablón de Madera Rústica Tallada */
+    .wood-board {
+      background: linear-gradient(180deg, #F59E0B 0%, #D97706 48%, #B45309 52%, #92400E 100%);
+      border: 3px solid #78350F;
+      box-shadow: 0 5px 0 #451A03, 0 10px 20px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    /* Cinta de Pergamino de Madera Dorada */
+    .wood-ribbon {
+      background: linear-gradient(180deg, #FEF3C7 0%, #FDE68A 60%, #F59E0B 100%);
+      border: 2px solid #B45309;
+      box-shadow: 0 4px 0 #78350F, 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Letras 3D estilo Caricatura/Animación para "CLAIRE" */
+    .bubble-letter {
+      display: inline-block;
+      font-family: 'Fredoka', cursive, sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: clamp(2.3rem, 9vw, 3.8rem);
+      line-height: 1;
+      padding: 0 3px;
+      filter: drop-shadow(0 4px 0 #78350F) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+      -webkit-text-stroke: 3px #FFFFFF;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .bubble-letter:hover {
+      transform: translateY(-5px) scale(1.12) rotate(4deg);
+    }
+
+    /* Mariposas de la Selva flotando suavemente */
+    @keyframes butterflyFly1 {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(6deg);
+      }
+
+      25% {
+        transform: translate3d(24px, -28px, 0) rotate(-8deg);
+      }
+
+      50% {
+        transform: translate3d(48px, -12px, 0) rotate(14deg);
+      }
+
+      75% {
+        transform: translate3d(18px, -40px, 0) rotate(-4deg);
+      }
+
+      100% {
+        transform: translate3d(0, 0, 0) rotate(6deg);
+      }
+    }
+
+    .butterfly-1 {
+      animation: butterflyFly1 8.5s ease-in-out infinite;
+    }
+
+    @keyframes butterflyFly2 {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(-6deg);
+      }
+
+      30% {
+        transform: translate3d(-30px, -22px, 0) rotate(10deg);
+      }
+
+      60% {
+        transform: translate3d(-12px, -45px, 0) rotate(-10deg);
+      }
+
+      100% {
+        transform: translate3d(0, 0, 0) rotate(-6deg);
+      }
+    }
+
+    .butterfly-2 {
+      animation: butterflyFly2 10s ease-in-out 2s infinite;
+    }
+
+    .btn-bounce:active {
+      transform: scale(0.97);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Animación del Cochecito Andando / Rolling Stroller */
+    @keyframes rollWheel {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes carriageWalk {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      25% {
+        transform: translateY(-3.5px) rotate(-1.5deg);
+      }
+
+      50% {
+        transform: translateY(0.5px) rotate(0.5deg);
+      }
+
+      75% {
+        transform: translateY(-2px) rotate(1deg);
+      }
+    }
+
+    @keyframes roadRoll {
+      from {
+        stroke-dashoffset: 0;
+      }
+
+      to {
+        stroke-dashoffset: -32;
+      }
+    }
+
+    .stroller-wheel-back {
+      transform-origin: 82px 182px;
+      animation: rollWheel 2.2s linear infinite;
+    }
+
+    .stroller-wheel-front {
+      transform-origin: 158px 182px;
+      animation: rollWheel 2.2s linear infinite;
+    }
+
+    .stroller-body-walk {
+      animation: carriageWalk 1.5s ease-in-out infinite;
+    }
+
+    .road-dashes {
+      animation: roadRoll 1s linear infinite;
+    }
+
+    /* ESCENARIO Y PERSPECTIVA 3D DE ALTA DEFINICIÓN */
+    .scene-3d {
+      perspective: 1100px;
+      perspective-origin: 50% 45%;
+      transform-style: preserve-3d;
+    }
+
+    /* ANIMACIONES REALES 3D DE HOJAS / CARTAS VOLANDO AL VIENTO (TUMBLING EN X, Y, Z CON PROFUNDIDAD) */
+    @keyframes windLeaf3D_1 {
+      0% {
+        transform: translate3d(-150px, -35px, -180px) rotateX(75deg) rotateY(-50deg) rotateZ(-30deg) scale(0.72);
+        opacity: 0;
+        filter: brightness(0.9) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
+      }
+
+      18% {
+        opacity: 0.95;
+      }
+
+      50% {
+        transform: translate3d(65px, 25px, 140px) rotateX(-55deg) rotateY(45deg) rotateZ(35deg) scale(1.15);
+        opacity: 0.98;
+        filter: brightness(1.05) drop-shadow(0 18px 24px rgba(251, 111, 146, 0.38));
+      }
+
+      82% {
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate3d(360px, -45px, -160px) rotateX(135deg) rotateY(-65deg) rotateZ(85deg) scale(0.72);
+        opacity: 0;
+        filter: brightness(0.88) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.08));
+      }
+    }
+
+    @keyframes windLeaf3D_2 {
+      0% {
+        transform: translate3d(340px, 45px, -160px) rotateX(-65deg) rotateY(60deg) rotateZ(45deg) scale(0.72);
+        opacity: 0;
+        filter: brightness(0.88) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
+      }
+
+      20% {
+        opacity: 0.95;
+      }
+
+      55% {
+        transform: translate3d(75px, -30px, 125px) rotateX(50deg) rotateY(-45deg) rotateZ(-30deg) scale(1.12);
+        opacity: 0.98;
+        filter: brightness(1.06) drop-shadow(0 16px 22px rgba(254, 240, 138, 0.45));
+      }
+
+      85% {
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate3d(-140px, 35px, -190px) rotateX(-120deg) rotateY(75deg) rotateZ(-65deg) scale(0.7);
+        opacity: 0;
+        filter: brightness(0.86) drop-shadow(0 3px 5px rgba(0, 0, 0, 0.06));
+      }
+    }
+
+    @keyframes windLeaf3D_3 {
+      0% {
+        transform: translate3d(-90px, 95px, -130px) rotateX(50deg) rotateY(-35deg) rotateZ(25deg) scale(0.75);
+        opacity: 0;
+      }
+
+      22% {
+        opacity: 0.95;
+      }
+
+      60% {
+        transform: translate3d(135px, -40px, 115px) rotateX(-70deg) rotateY(40deg) rotateZ(-45deg) scale(1.12);
+        opacity: 0.98;
+        filter: brightness(1.05) drop-shadow(0 16px 22px rgba(186, 230, 253, 0.45));
+      }
+
+      85% {
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate3d(370px, 65px, -110px) rotateX(105deg) rotateY(-55deg) rotateZ(70deg) scale(0.75);
+        opacity: 0;
+      }
+    }
+
+    @keyframes windLeaf3D_4 {
+      0% {
+        transform: translate3d(310px, -40px, -145px) rotateX(65deg) rotateY(-45deg) rotateZ(-40deg) scale(0.72);
+        opacity: 0;
+      }
+
+      22% {
+        opacity: 0.92;
+      }
+
+      50% {
+        transform: translate3d(25px, 60px, 130px) rotateX(-55deg) rotateY(55deg) rotateZ(35deg) scale(1.14);
+        opacity: 0.98;
+        filter: brightness(1.08) drop-shadow(0 18px 24px rgba(232, 232, 255, 0.45));
+      }
+
+      82% {
+        opacity: 0.92;
+      }
+
+      100% {
+        transform: translate3d(-120px, -35px, -175px) rotateX(120deg) rotateY(-70deg) rotateZ(-60deg) scale(0.72);
+        opacity: 0;
+      }
+    }
+
+    @keyframes windLeaf3D_5 {
+      0% {
+        transform: translate3d(15px, -100px, -160px) rotateX(35deg) rotateY(50deg) rotateZ(15deg) scale(0.7);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.95;
+      }
+
+      52% {
+        transform: translate3d(115px, 15px, 135px) rotateX(-45deg) rotateY(-45deg) rotateZ(-25deg) scale(1.15);
+        opacity: 0.98;
+        filter: brightness(1.06) drop-shadow(0 16px 22px rgba(167, 243, 208, 0.45));
+      }
+
+      80% {
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translate3d(-80px, 110px, -170px) rotateX(95deg) rotateY(65deg) rotateZ(50deg) scale(0.7);
+        opacity: 0;
+      }
+    }
+
+    .leaf-3d-1 {
+      animation: windLeaf3D_1 6.8s cubic-bezier(0.42, 0.05, 0.58, 0.95) infinite;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    .leaf-3d-2 {
+      animation: windLeaf3D_2 7.8s cubic-bezier(0.42, 0.05, 0.58, 0.95) 1.6s infinite;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    .leaf-3d-3 {
+      animation: windLeaf3D_3 6.4s cubic-bezier(0.42, 0.05, 0.58, 0.95) 3.2s infinite;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    .leaf-3d-4 {
+      animation: windLeaf3D_4 7.4s cubic-bezier(0.42, 0.05, 0.58, 0.95) 4.8s infinite;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    .leaf-3d-5 {
+      animation: windLeaf3D_5 7.0s cubic-bezier(0.42, 0.05, 0.58, 0.95) 2.4s infinite;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    /* Brisa suave 3D para la carta central de lectura */
+    .paper-breeze-3d {
+      animation: paperBreeze3D 4.5s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+
+    @keyframes paperBreeze3D {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotateX(2deg) rotateY(-2.5deg) rotateZ(-1deg);
+      }
+
+      50% {
+        transform: translateY(-9px) rotateX(-2.5deg) rotateY(2.5deg) rotateZ(1.5deg);
+      }
+    }
+  </style>
+
+  <!-- ========================================================================= -->
+  <!-- 🌿 PANEL DE CONFIGURACIÓN PRINCIPAL (EDITA AQUÍ TODOS TUS DATOS FÁCILMENTE) -->
+  <!-- ========================================================================= -->
+  <script>
+    const CONFIG = {
+      // 1. NOMBRE DE LA BEBÉ Y PAPÁS (Inspirado en la tarjeta del Libro de la Selva)
+      babyName: "Claire",
+      parentsNames: "Jheremy y Estefany",
+      princessSubtitle: "Nuestra pequeña princesa está en camino",
+
+      // 2. FECHA Y HORA DEL EVENTO (Según la invitación)
+      eventDateText: "Sábado 7 de Noviembre de 2026",
+      eventTimeText: "16:00 Hrs.",
+      eventSubtitle: "Acompáñanos a celebrar la pronta llegada de nuestra pequeña bendición. Llena nuestro día de amor, risas y buenos deseos.",
+
+      // 3. AGENDAR EN GOOGLE CALENDAR
+      calendarTitle: "Baby Shower de Claire Borja Romero",
+      calendarStartDate: "20261107T200000Z", // 16:00 Bolivia (UTC-4) = 20:00 UTC
+      calendarEndDate: "20261107T230000Z",
+      calendarDetails: "¡Acompáñanos a celebrar el Baby Shower de Claire! Jheremy y Estefany te esperan con mucho amor en la fiesta temática del Libro de la Selva.",
+      calendarLocation: "Calle Pizarro 184",
+
+      // 4. CÓMO LLEGAR (GOOGLE MAPS)
+      mapsCoords: "-19.584523, -65.747328",
+
+      // 5. CONFIRMAR POR WHATSAPP
+      whatsappNumber: "59160467987",
+      whatsappMessage: "¡Hola Jheremy y Estefany! Confirmo mi asistencia al Baby Shower de Claire. ¡Ahí nos vemos con mucha alegría! 🦁🍼✨",
+
+      // 6. MÚSICA DE FONDO (Exclusivamente tu archivo local musica.mp3)
+      musicUrl: "musica.mp3",
+      youtubeVideoId: "",
+
+      // 7. SUPABASE (Para el Muro de Deseos y Registro de Ganadores)
+      supabaseUrl: "https://netzjpsrjlrceemjbpze.supabase.co",
+      supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ldHpqcHNyamxyY2VlbWpicHplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM4ODU0NjksImV4cCI6MjEwOTQ2MTQ2OX0.wboZWs5jE-yj-Xk6-2k7MoJ-pN414Cvj4VKq6W4ZBbU",
+    };
+  </script>
+</head>
+
+<body
+  class="font-sans text-gray-700 antialiased min-h-screen relative overflow-x-hidden selection:bg-baby-accent selection:text-white">
+
+  <!-- Decoración de Fondo: Selva Tropical de El Libro de la Selva y Mariposas -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <!-- Resplandor solar en la copa de los árboles -->
+    <div
+      class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl animate-pulseSubtle">
+    </div>
+    <div class="absolute top-1/4 -left-20 w-80 h-80 bg-emerald-400/15 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-20 -right-20 w-80 h-80 bg-lime-300/15 rounded-full blur-3xl animate-float-delayed">
+    </div>
+
+    <!-- Hojas Tropicales Decorativas en las Esquinas -->
+    <div class="absolute -top-6 -left-6 text-5xl opacity-40 select-none animate-float">🌿</div>
+    <div class="absolute top-12 -right-4 text-4xl opacity-35 select-none animate-float-delayed">🍃</div>
+    <div class="absolute top-1/2 -left-6 text-5xl opacity-30 select-none">🌴</div>
+    <div class="absolute bottom-32 -right-4 text-5xl opacity-35 select-none">🌿</div>
+
+    <!-- Mariposas Tropicales Flotando -->
+    <div class="absolute top-28 left-8 text-2xl select-none butterfly-1 opacity-75">🦋</div>
+    <div class="absolute top-1/3 right-10 text-2xl select-none butterfly-2 opacity-70">✨</div>
+    <div class="absolute bottom-40 left-12 text-2xl select-none butterfly-1 opacity-65">🌸</div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 1. BOTÓN FLOTANTE DE MÚSICA (Fijo en pantalla)            -->
+  <!-- ======================================================== -->
+  <div class="fixed bottom-6 right-5 z-50 flex items-center gap-2">
+    <span id="musicBadge"
+      class="bg-[#FEF3C7] text-xs font-title font-bold text-amber-900 px-3.5 py-1.5 rounded-full shadow-xl border-2 border-amber-400 animate-pulseSubtle cursor-pointer select-none">
+      Toca para Música 🎵🐾
+    </span>
+
+    <button id="musicToggleBtn" type="button" aria-label="Reproducir o pausar música de fondo"
+      class="relative w-14 h-14 rounded-full bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 text-amber-300 shadow-2xl border-3 border-amber-400 flex items-center justify-center btn-bounce hover:scale-110 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-300 cursor-pointer">
+
+      <span id="soundWave"
+        class="hidden absolute inset-0 rounded-full border-2 border-amber-300 animate-ping opacity-45"></span>
+
+      <!-- Icono de Silenciado -->
+      <svg id="iconMuted" class="w-6 h-6 transition-transform text-amber-200" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+      </svg>
+
+      <!-- Icono con Sonido Activo -->
+      <svg id="iconPlaying" class="w-6 h-6 hidden text-amber-300 animate-pulse" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Audio de fondo nativo (Exclusivamente musica.mp3 local) -->
+  <audio id="bgAudio" loop preload="auto" playsinline src="musica.mp3"></audio>
+
+  <!-- Contenedor oculto para reproductor YouTube (si se activa) -->
+  <div id="ytPlayerContainer" class="hidden pointer-events-none w-0 h-0 overflow-hidden">
+    <div id="ytPlayer"></div>
+  </div>
+
+  <!-- CONTENEDOR PRINCIPAL RESPONSIVE -->
+  <main class="relative z-10 max-w-xl mx-auto px-4 py-8 sm:py-12 flex flex-col gap-10">
+
+    <!-- ======================================================== -->
+    <!-- 2. HERO SECTION: TEMÁTICA LIBRO DE LA SELVA              -->
+    <!-- ======================================================== -->
+    <header class="glass-card rounded-3xl p-5 sm:p-7 text-center relative overflow-hidden transition-all duration-300">
+
+      <!-- Hojas decorativas en las esquinas interiores de la tarjeta -->
+      <div class="absolute -top-3 -left-3 text-2xl select-none opacity-80">🌿</div>
+      <div class="absolute -top-3 -right-3 text-2xl select-none opacity-80">🌸</div>
+
+      <!-- Tablón de Madera: ¡BABY SHOWER! -->
+      <div class="inline-block mb-2">
+        <div
+          class="wood-board px-5 sm:px-7 py-2 rounded-2xl shadow-xl border-3 border-amber-900 inline-flex items-center gap-2">
+          <span class="text-base sm:text-lg">🌿</span>
+          <span class="font-title text-lg sm:text-xl font-bold tracking-wider text-white uppercase drop-shadow-md">
+            ¡BABY SHOWER!
+          </span>
+          <span class="text-base sm:text-lg">🌿</span>
+        </div>
+      </div>
+
+      <!-- Título con Letras 3D Multicolor estilo Caricatura: CLAIRE -->
+      <div class="flex items-center justify-center gap-1 sm:gap-1.5 my-2 select-none">
+        <span class="bubble-letter text-[#FF5A79]">C</span>
+        <span class="bubble-letter text-[#FFBA08]">L</span>
+        <span class="bubble-letter text-[#38BDF8]">A</span>
+        <span class="bubble-letter text-[#22C55E]">I</span>
+        <span class="bubble-letter text-[#FB923C]">R</span>
+        <span class="bubble-letter text-[#A855F7]">E</span>
+        <!-- Hook oculto para que no rompa JS existente si busca heroBabyName -->
+        <span id="heroBabyName" class="hidden">Claire</span>
+      </div>
+
+      <!-- Cinta de Pergamino: Nuestra pequeña princesa está en camino -->
+      <div
+        class="inline-flex items-center gap-2 wood-ribbon px-4 py-1.5 rounded-full text-amber-950 font-title font-bold text-xs sm:text-sm shadow-md mb-3">
+        <span>💕</span>
+        <span>Nuestra pequeña princesa está en camino</span>
+        <span>💕</span>
+      </div>
+
+      <!-- ILUSTRACIÓN DE LA LEONCITA DURMIENDO SOBRE SU CAMA DE FLORES -->
+      <div class="relative max-w-[340px] mx-auto my-3 text-center">
+        <!-- Resplandor solar tropical suave -->
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-amber-400/30 via-pink-400/25 to-emerald-400/30 rounded-full blur-2xl transform scale-110 pointer-events-none">
+        </div>
+
+        <div class="relative z-10 p-1 transform hover:scale-105 transition-all duration-500 animate-float">
+          <img src="leoncita_vignette.png" alt="Leoncita Claire durmiendo sobre flores con su moño rosa"
+            class="w-full h-auto drop-shadow-2xl rounded-3xl border-4 border-amber-300/90 shadow-2xl object-contain mx-auto">
+
+          <div
+            class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 bg-[#FFFBEB] border-2 border-amber-500 text-amber-900 font-title text-[11px] font-bold px-3.5 py-0.5 rounded-full shadow-lg flex items-center gap-1.5 whitespace-nowrap">
+            <span>🌸</span>
+            <span>Dulces Sueños, Princesa Claire</span>
+            <span>💤</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Placa de Madera de los Papás: Jheremy y Estefany -->
+      <div class="mt-4 mb-2">
+        <div
+          class="wood-board inline-flex items-center gap-2 px-6 py-2 rounded-2xl text-amber-100 font-title font-bold text-sm sm:text-base shadow-lg border-2 border-amber-950">
+          <span>💕</span>
+          <span class="text-white drop-shadow">Jheremy y Estefany</span>
+          <span>💕</span>
+        </div>
+      </div>
+
+      <!-- Mensaje de Invitación -->
+      <p id="heroSubtitle"
+        class="text-emerald-950 font-medium text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-5 italic">
+        Acompáñanos a celebrar la pronta llegada de nuestra pequeña bendición. Llena nuestro día de amor, risas y buenos
+        deseos.
+      </p>
+
+      <!-- Tarjetas de Fecha, Hora y Lugar estilo Tablones de Safari -->
+      <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+        <!-- Fecha -->
+        <div class="wood-ribbon p-2.5 rounded-xl text-center flex flex-col items-center justify-center">
+          <span class="text-base sm:text-lg mb-0.5">📅</span>
+          <span class="block text-[10px] uppercase font-bold text-amber-900 tracking-wider">Fecha</span>
+          <span id="heroDateDisplay" class="font-title font-bold text-xs sm:text-sm text-emerald-950 leading-tight">
+            7 de Noviembre
+          </span>
+          <span class="text-[10px] text-amber-800 font-semibold">de 2026</span>
+        </div>
+
+        <!-- Hora -->
+        <div class="wood-ribbon p-2.5 rounded-xl text-center flex flex-col items-center justify-center">
+          <span class="text-base sm:text-lg mb-0.5">⏰</span>
+          <span class="block text-[10px] uppercase font-bold text-amber-900 tracking-wider">Hora</span>
+          <span id="heroTimeDisplay" class="font-title font-bold text-xs sm:text-sm text-emerald-950 leading-tight">
+            16:00 Hrs.
+          </span>
+          <span class="text-[10px] text-amber-800 font-semibold">En punto</span>
+        </div>
+
+        <!-- Lugar -->
+        <div class="wood-ribbon p-2.5 rounded-xl text-center flex flex-col items-center justify-center">
+          <span class="text-base sm:text-lg mb-0.5">📍</span>
+          <span class="block text-[10px] uppercase font-bold text-amber-900 tracking-wider">Lugar</span>
+          <span class="font-title font-bold text-xs sm:text-sm text-emerald-950 leading-tight">
+            Pizarro 84
+          </span>
+          <span class="text-[10px] text-amber-800 font-semibold">Te esperamos</span>
+        </div>
+      </div>
+
+      <!-- TRES BOTONES PRINCIPALES GRANDES ESTILO TABLÓN SAFARI -->
+      <div class="flex flex-col gap-3.5 sm:gap-4">
+
+        <!-- Botón A: Añadir a Google Calendar -->
+        <a id="btnCalendarLink" href="#" target="_blank" rel="noopener noreferrer"
+          class="group btn-bounce flex items-center justify-between w-full bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-800 hover:from-emerald-500 hover:to-teal-700 text-white font-title text-base sm:text-lg font-bold py-3.5 px-6 rounded-2xl border-2 border-amber-300 shadow-xl transition-all">
+          <div class="flex items-center gap-3">
+            <span
+              class="w-10 h-10 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center text-xl shadow-sm">
+              🗓️
+            </span>
+            <span class="text-left drop-shadow">Añadir a mi Calendario</span>
+          </div>
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+
+        <!-- Botón B: Cómo llegar (Google Maps) -->
+        <a id="btnMapsLink" href="#" target="_blank" rel="noopener noreferrer"
+          class="group btn-bounce flex items-center justify-between w-full bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-white font-title text-base sm:text-lg font-bold py-3.5 px-6 rounded-2xl border-2 border-amber-300 shadow-xl transition-all">
+          <div class="flex items-center gap-3">
+            <span
+              class="w-10 h-10 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center text-xl shadow-sm">
+              📍
+            </span>
+            <div class="text-left">
+              <span class="block leading-tight drop-shadow">Cómo llegar (Mapa)</span>
+              <span class="text-xs text-amber-100 font-normal font-sans">Ver ruta en Google Maps</span>
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-white transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+
+        <!-- Botón C: Confirmar Asistencia (WhatsApp Deep Link) -->
+        <a id="btnWhatsAppLink" href="#" target="_blank" rel="noopener noreferrer"
+          class="group btn-bounce flex items-center justify-between w-full bg-gradient-to-r from-green-500 via-emerald-600 to-green-700 hover:from-green-400 hover:to-emerald-500 text-white font-title text-base sm:text-lg font-bold py-3.5 px-6 rounded-2xl border-2 border-amber-300 shadow-xl transition-all">
+          <div class="flex items-center gap-3">
+            <span
+              class="w-10 h-10 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center text-xl shadow-sm">
+              💬
+            </span>
+            <div class="text-left">
+              <span class="block leading-tight drop-shadow">Confirmar Asistencia</span>
+              <span class="text-xs text-emerald-100 font-normal font-sans">Vía WhatsApp con Jheremy y Estefany</span>
+            </div>
+          </div>
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+
+      </div>
+    </header>
+
+    <!-- ======================================================== -->
+    <!-- 3. SECCIÓN INTERACTIVA 1: MINIJUEGO CON PREMIO           -->
+    <!-- ======================================================== -->
+    <section
+      class="glass-card rounded-3xl p-5 sm:p-7 text-center relative overflow-hidden border-4 border-amber-400/90 shadow-2xl">
+
+      <!-- Aviso de Premio Especial Safari -->
+      <div class="mb-4">
+        <span
+          class="inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 text-amber-100 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-2 shadow-md border border-amber-300">
+          <span>🌿</span> ¡Misión Safari en la Selva! <span>🏆</span>
+        </span>
+        <h2 class="font-title text-2xl sm:text-3xl font-bold text-emerald-950 mb-1">
+          ¡Ayuda a la cigüeña en la selva de Claire! 🦁✨
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-600 max-w-md mx-auto">
+          Toca o haz clic para volar y esquivar <span class="font-bold text-emerald-700">20 cañas de bambú y flores</span>.
+          <strong class="text-rose-600 block sm:inline mt-1 sm:mt-0 font-semibold">¡Los que completen el reto reclaman su premio especial con Jheremy y Estefany el día de la fiesta! 🎁</strong>
+        </p>
+      </div>
+
+      <!-- Contenedor del Lienzo Arcade -->
+      <div id="gameContainer"
+        class="relative w-full max-w-[340px] mx-auto rounded-2xl overflow-hidden border-4 border-amber-400/90 shadow-xl bg-gradient-to-b from-amber-100 via-emerald-50 to-teal-100 select-none cursor-pointer">
+
+        <!-- Canvas HTML5 -->
+        <canvas id="gameCanvas" width="340" height="420" class="block w-full h-auto cursor-pointer touch-none"></canvas>
+
+        <!-- Overlay: Pantalla de Inicio -->
+        <div id="gameStartOverlay"
+          class="absolute inset-0 bg-emerald-950/50 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-white text-center cursor-pointer transition-opacity duration-300">
+          <div
+            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-3xl flex items-center justify-center mb-3 shadow-xl border-2 border-amber-200 animate-bounce">
+            🕊️
+          </div>
+          <p class="font-title text-2xl font-bold text-amber-100 drop-shadow mb-1">¡Toca para Iniciar el Safari!</p>
+          <p
+            class="text-xs text-emerald-100 bg-emerald-900/60 px-3.5 py-1 rounded-full mb-2 border border-emerald-400/30">
+            Esquiva los bambús y alcanza los 20 niveles 🌿
+          </p>
+          <span
+            class="text-[11px] bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-bold px-4 py-1.5 rounded-full shadow border border-amber-200">
+            ¡Premio asegurado en el festejo! 🎁🦁
+          </span>
+        </div>
+
+        <!-- Overlay: Pantalla de Victoria con Formulario de Registro para Premio -->
+        <div id="gameWinOverlay"
+          class="hidden absolute inset-0 bg-gradient-to-b from-emerald-900/95 via-teal-900/95 to-amber-950/95 backdrop-blur-sm flex flex-col items-center justify-center p-4 text-white text-center animate-fade overflow-y-auto">
+          <div class="text-4xl mb-1 animate-bounce">🏆🦁🎁</div>
+          <h3 class="font-title text-2xl font-bold text-amber-300 mb-0.5">¡Misión Cumplida!</h3>
+          <p class="text-[11px] text-amber-100 mb-2.5 max-w-[260px] leading-tight">
+            ¡Completaste los 20 niveles cruzando la selva! Registra tu nombre para reclamar tu premio con Jheremy y Estefany.
+          </p>
+
+          <!-- Formulario de Registro -->
+          <div id="winnerFormBox"
+            class="w-full max-w-[270px] bg-amber-50/95 text-gray-800 rounded-2xl p-3.5 shadow-2xl mb-2 text-left border-2 border-amber-400">
+            <label for="winnerNameInput"
+              class="block text-[11px] font-bold text-amber-950 uppercase tracking-wider mb-1">
+              Tu Nombre y Apellido:
+            </label>
+            <input type="text" id="winnerNameInput" placeholder="Ej: Tía Mariana Romero" maxlength="50"
+              class="w-full px-3 py-2 text-xs rounded-xl border border-amber-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 mb-2 font-medium">
+
+            <button id="btnSubmitWinner" type="button"
+              class="w-full btn-bounce bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-title text-xs font-bold py-2.5 px-3 rounded-xl shadow-md border border-amber-300 transition flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>¡Anotarme para mi Premio!</span>
+              <span>🎁</span>
+            </button>
+            <p id="winnerFeedback" class="hidden text-[10px] mt-1 font-semibold text-rose-600 text-center"></p>
+          </div>
+
+          <!-- Mensaje de éxito tras registrarse -->
+          <div id="winnerSuccessBox"
+            class="hidden w-full max-w-[270px] bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-2xl p-3 shadow-xl mb-2 text-center border border-amber-300">
+            <span class="text-2xl block mb-1">🎉🦁</span>
+            <p class="font-bold font-title text-sm mb-0.5 text-amber-200">¡Registrado con Éxito!</p>
+            <p class="text-[11px] text-emerald-100">
+              Dile tu nombre a los papis en la fiesta para entregarte tu premio especial.
+            </p>
+          </div>
+
+          <button id="btnPlayAgain"
+            class="btn-bounce bg-white/20 hover:bg-white/30 text-amber-100 font-title font-bold px-4 py-1.5 rounded-full border border-amber-300/50 text-xs transition cursor-pointer">
+            Jugar otra vez 🔄
+          </button>
+        </div>
+
+        <!-- Overlay: Game Over -->
+        <div id="gameOverOverlay"
+          class="hidden absolute inset-0 bg-emerald-950/85 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-white text-center cursor-pointer">
+          <div class="text-4xl mb-2">🌿💥</div>
+          <h3 class="font-title text-2xl font-bold text-amber-300 mb-1">¡Casi lo logras!</h3>
+          <p id="gameOverScoreText" class="text-xs text-emerald-100 mb-4">
+            Nivel alcanzado: 0 de 20
+          </p>
+          <button id="btnRetry"
+            class="btn-bounce bg-gradient-to-r from-amber-500 to-amber-600 text-white font-title font-bold px-6 py-2.5 rounded-full shadow-lg border-2 border-amber-300 hover:brightness-110 transition-all text-sm cursor-pointer">
+            Reintentar Safari 🔁
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra informativa del juego -->
+      <div class="mt-3 flex items-center justify-center text-xs font-semibold">
+        <span class="flex items-center gap-1.5 bg-amber-100/90 text-amber-950 px-4 py-1.5 rounded-full border border-amber-300 shadow-sm">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Objetivo: 20 niveles para ganar tu premio</span>
+          <span>🏆</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- 4. SECCIÓN INTERACTIVA 2: EL COCHECITO DE LOS DESEOS     -->
+    <!-- ======================================================== -->
+    <section class="glass-card rounded-3xl p-5 sm:p-7 relative overflow-hidden border-4 border-amber-400/90 shadow-2xl">
+
+      <div class="text-center mb-3">
+        <span
+          class="inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 text-amber-100 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-2 shadow-md border border-amber-300">
+          <span>🌿</span> Cochecito de las Bendiciones <span>🎀</span>
+        </span>
+        <h2 class="font-title text-2xl sm:text-3xl font-bold text-emerald-950 mb-1">
+          Cartas de Amor para Claire 💕
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-600 max-w-sm mx-auto">
+          Los mejores deseos flotan alrededor del cochecito de la pequeña princesa como suaves hojas de amor en la
+          brisa.
+        </p>
+      </div>
+
+      <!-- ESCENARIO DEL COCHECITO ROSA (ANIMACIÓN ANDANDO) Y HOJAS 3D VOLANDO AL VIENTO -->
+      <div
+        class="scene-3d relative w-full max-w-md mx-auto min-h-[420px] sm:min-h-[460px] flex flex-col items-center justify-center py-4 select-none overflow-hidden">
+
+        <!-- Destellos suaves de la selva de fondo -->
+        <div class="absolute inset-0 pointer-events-none flex items-center justify-center opacity-60">
+          <div class="w-64 h-64 rounded-full bg-amber-200/40 blur-3xl"></div>
+          <div class="absolute top-4 left-6 w-20 h-10 bg-emerald-200/40 rounded-full blur-[2px] animate-float"></div>
+          <div
+            class="absolute bottom-12 right-6 w-24 h-12 bg-pink-200/40 rounded-full blur-[2px] animate-float-delayed">
+          </div>
+        </div>
+
+        <!-- 5 HOJAS/CARTAS REALES 3D VOLANDO Y VOLTEANDO EN EL ESPACIO (TUMBLING 3D) -->
+        <!-- Hoja 3D 1 (Rosa Flor Selvática con sello de hibisco) -->
+        <div class="pointer-events-none absolute z-20 leaf-3d-1 top-6 left-4">
+          <div
+            class="w-13 h-16 bg-gradient-to-br from-[#FFFDF5] via-[#FFF1F2] to-[#FFE4E6] rounded-xl border-2 border-rose-300/80 p-1.5 flex flex-col justify-between relative overflow-hidden shadow-xl">
+            <div
+              class="absolute top-0 right-0 w-4 h-4 bg-gradient-to-bl from-rose-400 to-white shadow-sm border-b border-l border-rose-300">
+            </div>
+            <span class="text-[11px] font-bold">🌺</span>
+            <div class="space-y-1 my-auto">
+              <div class="h-0.5 w-7 bg-rose-400/70 rounded"></div>
+              <div class="h-0.5 w-9 bg-rose-300/60 rounded"></div>
+              <div class="h-0.5 w-6 bg-rose-400/50 rounded"></div>
+            </div>
+            <span class="text-[9px] text-right">🎀</span>
+          </div>
+        </div>
+
+        <!-- Hoja 3D 2 (Pergamino Dorado con sello de leoncita) -->
+        <div class="pointer-events-none absolute z-20 leaf-3d-2 top-20 right-4">
+          <div
+            class="w-12 h-15 bg-gradient-to-br from-[#FFFDF5] via-[#FEF3C7] to-[#FDE68A] rounded-xl border-2 border-amber-300/80 p-1.5 flex flex-col justify-between relative overflow-hidden shadow-xl">
+            <div
+              class="absolute top-0 right-0 w-3.5 h-3.5 bg-gradient-to-bl from-amber-400 to-white shadow-sm border-b border-l border-amber-300">
+            </div>
+            <span class="text-[11px] font-bold">🦁</span>
+            <div class="space-y-1 my-auto">
+              <div class="h-0.5 w-8 bg-amber-500/70 rounded"></div>
+              <div class="h-0.5 w-6 bg-amber-400/60 rounded"></div>
+            </div>
+            <span class="text-[9px] text-right">👑</span>
+          </div>
+        </div>
+
+        <!-- Hoja 3D 3 (Brote de Selva Verde con sello vegetal) -->
+        <div class="pointer-events-none absolute z-20 leaf-3d-3 bottom-24 left-6">
+          <div
+            class="w-11 h-14 bg-gradient-to-br from-[#FFFDF5] via-[#DCFCE7] to-[#BBF7D0] rounded-xl border-2 border-emerald-300/80 p-1.5 flex flex-col justify-between relative overflow-hidden shadow-xl">
+            <div
+              class="absolute top-0 right-0 w-3.5 h-3.5 bg-gradient-to-bl from-emerald-400 to-white shadow-sm border-b border-l border-emerald-300">
+            </div>
+            <span class="text-[11px] font-bold">🌿</span>
+            <div class="space-y-1 my-auto">
+              <div class="h-0.5 w-6 bg-emerald-500/70 rounded"></div>
+              <div class="h-0.5 w-8 bg-emerald-400/60 rounded"></div>
+            </div>
+            <span class="text-[9px] text-right">🍃</span>
+          </div>
+        </div>
+
+        <!-- Hoja 3D 4 (Mariposa Tropical Celeste / Púrpura) -->
+        <div class="pointer-events-none absolute z-20 leaf-3d-4 bottom-14 right-8">
+          <div
+            class="w-12 h-14 bg-gradient-to-br from-[#FFFDF5] via-[#F3E8FF] to-[#E9D5FF] rounded-xl border-2 border-purple-300/80 p-1.5 flex flex-col justify-between relative overflow-hidden shadow-xl">
+            <div
+              class="absolute top-0 right-0 w-3.5 h-3.5 bg-gradient-to-bl from-purple-400 to-white shadow-sm border-b border-l border-purple-300">
+            </div>
+            <span class="text-[11px] font-bold">🦋</span>
+            <div class="space-y-1 my-auto">
+              <div class="h-0.5 w-7 bg-purple-400/70 rounded"></div>
+              <div class="h-0.5 w-5 bg-purple-300/60 rounded"></div>
+            </div>
+            <span class="text-[9px] text-right">✨</span>
+          </div>
+        </div>
+
+        <!-- Hoja 3D 5 (Destello Dorado Soleado) -->
+        <div class="pointer-events-none absolute z-20 leaf-3d-5 top-12 left-1/3">
+          <div
+            class="w-11 h-13 bg-gradient-to-br from-[#FFFDF5] via-[#FEF9C3] to-[#FEF08A] rounded-xl border-2 border-amber-300/80 p-1.5 flex flex-col justify-between relative overflow-hidden shadow-xl">
+            <div
+              class="absolute top-0 right-0 w-3 h-3 bg-gradient-to-bl from-amber-400 to-white shadow-sm border-b border-l border-amber-300">
+            </div>
+            <span class="text-[11px] font-bold">✨</span>
+            <div class="space-y-1 my-auto">
+              <div class="h-0.5 w-6 bg-amber-500/70 rounded"></div>
+              <div class="h-0.5 w-5 bg-amber-400/60 rounded"></div>
+            </div>
+            <span class="text-[9px] text-right">🌟</span>
+          </div>
+        </div>
+
+        <!-- 3 Cartitas/Hojas en órbita con nombres de los invitados (Solo de Supabase) -->
+        <div id="orbitBadge0" title="Toca para leer esta carta"
+          class="hidden cursor-pointer absolute top-3 left-2 sm:left-4 z-25 transition-all duration-500 animate-float hover:scale-110">
+          <div
+            class="bg-[#FFFDF5] text-emerald-950 text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-lg border-2 border-amber-300 flex items-center gap-1.5">
+            <span class="text-xs">🌺</span>
+            <span id="orbitName0" class="truncate max-w-[95px]"></span>
+          </div>
+        </div>
+
+        <div id="orbitBadge1" title="Toca para leer esta carta"
+          class="hidden cursor-pointer absolute top-4 right-2 sm:right-4 z-25 transition-all duration-500 animate-float-delayed hover:scale-110">
+          <div
+            class="bg-[#FFFDF5] text-emerald-950 text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-lg border-2 border-amber-300 flex items-center gap-1.5">
+            <span class="text-xs">🦁</span>
+            <span id="orbitName1" class="truncate max-w-[95px]"></span>
+          </div>
+        </div>
+
+        <div id="orbitBadge2" title="Toca para leer esta carta"
+          class="hidden cursor-pointer absolute bottom-14 right-2 sm:right-4 z-25 transition-all duration-500 animate-float hover:scale-110">
+          <div
+            class="bg-[#FFFDF5] text-emerald-950 text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-lg border-2 border-amber-300 flex items-center gap-1.5">
+            <span class="text-xs">🌿</span>
+            <span id="orbitName2" class="truncate max-w-[95px]"></span>
+          </div>
+        </div>
+
+        <!-- COCHECITO DE BEBÉ ROSA ANDANDO (RUEDAS GIRATORIAS Y BALANCEO DE CAMINAR) -->
+        <div class="relative z-10 w-48 sm:w-56 h-48 sm:h-56 my-1 flex items-center justify-center">
+          <svg class="w-full h-full drop-shadow-xl select-none pointer-events-none" viewBox="0 0 240 240" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <!-- Camino de suelo rodante (hojas y flores de selva) -->
+            <line x1="20" y1="210" x2="220" y2="210" stroke="#86EFAC" stroke-width="2.5" stroke-linecap="round"
+              stroke-dasharray="8 8" class="road-dashes" />
+
+            <!-- Sombra suave en el piso -->
+            <ellipse cx="120" cy="216" rx="60" ry="7" fill="rgba(5, 26, 16, 0.25)" filter="blur(4px)" />
+
+            <!-- CUERPO Y CAPOTA DEL COCHECITO (BALANCEO RÍTMICO DE ANDAR) -->
+            <g class="stroller-body-walk">
+              <!-- Manillar de madera dorada tallada -->
+              <path d="M58 86C48 98 48 116 70 140L88 152" stroke="#B45309" stroke-width="3.5" stroke-linecap="round" />
+              <path d="M48 86H68" stroke="#F59E0B" stroke-width="5" stroke-linecap="round" />
+
+              <!-- Chasis Dorado Selva -->
+              <path d="M82 182L120 142M158 182L120 142" stroke="#D97706" stroke-width="3.5" stroke-linecap="round" />
+              <path d="M82 182H158" stroke="#D97706" stroke-width="3" stroke-linecap="round" />
+
+              <!-- Capazo / Cuna del carrito (Rosa Princesa con ribete de flores) -->
+              <path d="M72 116C72 144 96 154 130 154C164 154 184 140 184 116H72Z" fill="#FFA5BA" stroke="#FB7185"
+                stroke-width="3" />
+              <!-- Patrón acolchado -->
+              <path d="M78 126Q128 150 178 126" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="3 3"
+                stroke-opacity="0.85" />
+              <path d="M84 138Q128 158 172 138" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="3 3"
+                stroke-opacity="0.85" />
+
+              <!-- Enredadera verde decorativa en el borde de la cuna -->
+              <path d="M75 116Q90 120 105 116Q120 120 135 116Q150 120 165 116Q180 120 183 116" stroke="#22C55E"
+                stroke-width="2" fill="none" />
+
+              <!-- Capota desplegada con encaje -->
+              <path d="M120 66C162 66 184 90 184 116H120V66Z" fill="#FFC2D1" stroke="#FB7185" stroke-width="3" />
+              <path d="M120 66Q156 86 158 116" stroke="#FFF5F7" stroke-width="2.5" />
+              <path d="M120 66Q172 96 178 116" stroke="#FFF5F7" stroke-width="2.5" />
+
+              <!-- Encaje festoneado blanco en el borde -->
+              <path d="M184 116C184 110 180 108 178 102C175 95 170 90 165 85C158 78 150 72 142 68C136 66 128 66 120 66"
+                stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+
+              <!-- Moño Rosa con flor de centro -->
+              <circle cx="120" cy="66" r="5" fill="#FB7185" />
+              <circle cx="120" cy="66" r="2.5" fill="#FDE047" />
+              <path d="M117 69C110 76 108 86 111 90" stroke="#FB7185" stroke-width="2.5" stroke-linecap="round" />
+              <path d="M123 69C128 76 130 86 127 90" stroke="#FB7185" stroke-width="2.5" stroke-linecap="round" />
+
+              <!-- Almohadita tierna asomando con coronita -->
+              <ellipse cx="146" cy="113" rx="14" ry="7" fill="#FFFFFF" />
+              <circle cx="146" cy="113" r="3" fill="#FB7185" />
+            </g>
+
+            <!-- RUEDA TRASERA GIRATORIA DORADA CON TOQUES DE SELVA -->
+            <g class="stroller-wheel-back">
+              <circle cx="82" cy="182" r="26" stroke="#F59E0B" stroke-width="3.5" fill="white" fill-opacity="0.95" />
+              <circle cx="82" cy="182" r="22" stroke="#FEF3C7" stroke-width="2" />
+              <line x1="82" y1="156" x2="82" y2="208" stroke="#D97706" stroke-width="1.8" />
+              <line x1="56" y1="182" x2="108" y2="182" stroke="#D97706" stroke-width="1.8" />
+              <line x1="64" y1="164" x2="100" y2="200" stroke="#D97706" stroke-width="1.8" />
+              <line x1="64" y1="200" x2="100" y2="164" stroke="#D97706" stroke-width="1.8" />
+              <circle cx="82" cy="182" r="6" fill="#FB7185" />
+              <circle cx="82" cy="182" r="2.5" fill="#FDE047" />
+            </g>
+
+            <!-- RUEDA DELANTERA GIRATORIA DORADA -->
+            <g class="stroller-wheel-front">
+              <circle cx="158" cy="182" r="22" stroke="#F59E0B" stroke-width="3.5" fill="white" fill-opacity="0.95" />
+              <circle cx="158" cy="182" r="18" stroke="#FEF3C7" stroke-width="2" />
+              <line x1="158" y1="160" x2="158" y2="204" stroke="#D97706" stroke-width="1.8" />
+              <line x1="136" y1="182" x2="180" y2="182" stroke="#D97706" stroke-width="1.8" />
+              <line x1="142" y1="166" x2="174" y2="198" stroke="#D97706" stroke-width="1.8" />
+              <line x1="142" y1="198" x2="174" y2="166" stroke="#D97706" stroke-width="1.8" />
+              <circle cx="158" cy="182" r="5" fill="#FB7185" />
+              <circle cx="158" cy="182" r="2" fill="#FDE047" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- CARTA SPOTLIGHT (HOJA DE PAPEL FLOTANDO AL FRENTE EN EL VIENTO CON EFECTO 3D) -->
+        <div id="spotlightLetterCard"
+          class="relative z-30 w-full max-w-[340px] px-2 -mt-10 sm:-mt-12 transition-all duration-700 ease-out transform paper-breeze-3d">
+          <!-- Tarjeta estilo Hoja de Papel Pergamino / Carta de Amor con marco dorado -->
+          <div id="spotlightPaperSheet"
+            class="bg-gradient-to-b from-[#FFFDF5] to-[#FEF9E7] p-5 rounded-2xl shadow-2xl border-2 border-amber-300 relative transform rotate-[-1deg] transition-all duration-500 hover:rotate-0">
+
+            <!-- Pin de flor de selva arriba -->
+            <div
+              class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white px-3.5 py-0.5 rounded-full shadow-md text-[11px] font-bold flex items-center gap-1 select-none border border-amber-200">
+              <span>🌺</span>
+              <span id="spotlightTag">Carta de Bendición</span>
+            </div>
+
+            <!-- Autor y Fecha -->
+            <div class="flex items-center justify-between mb-2.5 pt-1 border-b border-amber-200/80 pb-2">
+              <div class="flex items-center gap-2">
+                <span id="spotlightAvatar"
+                  class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center text-xs font-bold font-title shadow-sm border border-amber-300">
+                  🦁
+                </span>
+                <span id="spotlightAuthor" class="font-title font-semibold text-emerald-950 text-sm">
+                  Esperando mensajes... 💌
+                </span>
+              </div>
+              <span id="spotlightDate" class="text-[11px] text-amber-800 font-medium">
+                Hoy
+              </span>
+            </div>
+
+            <!-- Mensaje Flotante -->
+            <p id="spotlightMessage"
+              class="text-gray-700 text-xs sm:text-sm leading-relaxed italic min-h-[52px] flex items-center justify-center text-center px-1 font-serif">
+              "Aún no hay dedicatorias escritas. ¡Sé el primero en dejarle una bendición a Claire en el formulario de
+              abajo!"
+            </p>
+
+            <!-- Controles de Navegación del carrusel flotante -->
+            <div class="flex items-center justify-between mt-3 pt-2 border-t border-amber-200/80 text-xs">
+              <button id="btnPrevWish" type="button"
+                class="btn-bounce text-amber-800 hover:text-emerald-700 font-semibold px-2 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer">
+                <span>◀</span> <span>Anterior</span>
+              </button>
+
+              <span id="wishCounterBadge"
+                class="text-[11px] bg-amber-100 text-amber-900 font-bold px-2.5 py-0.5 rounded-full border border-amber-300 select-none">
+                0 de 0
+              </span>
+
+              <button id="btnNextWish" type="button"
+                class="btn-bounce text-amber-800 hover:text-emerald-700 font-semibold px-2 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer">
+                <span>Siguiente</span> <span>▶</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FORMULARIO DE DEDICATORIAS (PERMANENTEMENTE ABIERTO PARA LOS INVITADOS) -->
+      <div class="mt-4 pt-3 border-t-2 border-amber-200/80">
+        <div class="text-center mb-2.5">
+          <span
+            class="inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-600 to-amber-700 text-amber-100 text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow border border-amber-300">
+            <span>✍️</span> Escríbele una Carta a Claire <span>🦁</span>
+          </span>
+          <h4 class="font-title font-bold text-emerald-950 text-sm mt-1.5">
+            Deja tus bendiciones para que vuelen con el cochecito
+          </h4>
+        </div>
+
+        <form id="wishForm"
+          class="bg-[#FFFDF5]/95 p-4 sm:p-5 rounded-2xl border-2 border-amber-300 shadow-md space-y-3 transition-all">
+          <div>
+            <label for="userNameInput" class="block text-xs font-bold text-amber-950 uppercase tracking-wider mb-1">
+              Tu Nombre o Familia:
+            </label>
+            <input type="text" id="userNameInput" placeholder="Ej: Tía Mariana y Familia" maxlength="50"
+              class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-amber-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium">
+          </div>
+
+          <div>
+            <label for="userMessageInput" class="block text-xs font-bold text-amber-950 uppercase tracking-wider mb-1">
+              Tu Mensaje de Amor:
+            </label>
+            <textarea id="userMessageInput" rows="3" placeholder="Escribe tus bendiciones, oraciones y buenos deseos..."
+              maxlength="300"
+              class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-amber-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none font-medium"></textarea>
+          </div>
+
+          <div id="formFeedback" class="hidden text-xs py-2 px-3 rounded-lg font-medium text-center"></div>
+
+          <button type="submit" id="btnSubmitWish"
+            class="w-full btn-bounce bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-800 hover:from-emerald-500 hover:to-teal-700 text-white font-title text-sm sm:text-base font-bold py-3 px-4 rounded-xl shadow-lg border-2 border-amber-300 transition flex items-center justify-center gap-2 cursor-pointer">
+            <span>Enviar Carta al Cochecito</span>
+            <span>🕊️💕🌿</span>
+          </button>
+        </form>
+      </div>
+
+    </section>
+
+    <!-- FOOTER ESTILO EL LIBRO DE LA SELVA -->
+    <footer class="text-center py-8 text-amber-200/90 text-xs">
+      <div
+        class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-950/60 border border-amber-400/40 backdrop-blur-sm mb-2 shadow-lg">
+        <span>🦁</span>
+        <span class="font-title text-sm font-bold text-amber-300">¡Te esperamos para celebrar a la pequeña
+          Claire!</span>
+        <span>🎀</span>
+      </div>
+      <p class="font-medium text-amber-100/90 mb-1">
+        Jheremy y Estefany • Sábado 7 de Noviembre de 2026 • Calle Pizarro 84
+      </p>
+      <p class="text-[11px] text-amber-300/60">
+        Inspirado en El Libro de la Selva 🌿 Hecho con todo el amor de la familia
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT: Lógica de la Aplicación                     -->
+  <!-- ======================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---------------------------------------------------- */
+      /* A. INICIALIZAR DATOS DINÁMICOS DESDE CONFIG          */
+      /* ---------------------------------------------------- */
+      document.getElementById('pageTitle').innerText = `¡Baby Shower de ${CONFIG.babyName}! 🍼✨`;
+      document.getElementById('heroBabyName').innerText = CONFIG.babyName;
+      document.getElementById('footerBabyName').innerText = CONFIG.babyName;
+      document.getElementById('heroSubtitle').innerText = CONFIG.eventSubtitle;
+      document.getElementById('heroDateDisplay').innerText = CONFIG.eventDateText;
+      document.getElementById('heroTimeDisplay').innerText = CONFIG.eventTimeText;
+
+      // Configurar Enlace a Google Calendar
+      const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE`
+        + `&text=${encodeURIComponent(CONFIG.calendarTitle)}`
+        + `&dates=${CONFIG.calendarStartDate}/${CONFIG.calendarEndDate}`
+        + `&details=${encodeURIComponent(CONFIG.calendarDetails)}`
+        + `&location=${encodeURIComponent(CONFIG.calendarLocation)}`;
+      document.getElementById('btnCalendarLink').href = calendarUrl;
+
+      // Configurar Enlace a Google Maps
+      const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(CONFIG.mapsCoords)}`;
+      document.getElementById('btnMapsLink').href = mapsUrl;
+
+      // Configurar Enlace a WhatsApp
+      const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(CONFIG.whatsappMessage)}`;
+      document.getElementById('btnWhatsAppLink').href = waUrl;
+
+      /* ---------------------------------------------------- */
+      /* 1. MÚSICA DE FONDO (Garantizada Local & Online)      */
+      /* ---------------------------------------------------- */
+      const bgAudio = document.getElementById('bgAudio');
+      const musicToggleBtn = document.getElementById('musicToggleBtn');
+      const iconMuted = document.getElementById('iconMuted');
+      const iconPlaying = document.getElementById('iconPlaying');
+      const soundWave = document.getElementById('soundWave');
+      const musicBadge = document.getElementById('musicBadge');
+
+      let isMusicPlaying = false;
+      let ytPlayer = null;
+
+      // Asignar volumen óptimo y eventos de sincronización
+      bgAudio.volume = 0.8;
+      bgAudio.addEventListener('play', () => updateMusicUI(true));
+      bgAudio.addEventListener('pause', () => updateMusicUI(false));
+      bgAudio.addEventListener('ended', () => {
+        bgAudio.currentTime = 0;
+        bgAudio.play().catch(e => console.log(e));
+      });
+
+      // Manejo de eventos para el archivo local musica.mp3
+      bgAudio.addEventListener('error', (e) => {
+        console.warn('Esperando interacción del usuario para reproducir musica.mp3');
+      });
+
+      function updateMusicUI(playing) {
+        isMusicPlaying = playing;
+        if (playing) {
+          iconMuted.classList.add('hidden');
+          iconPlaying.classList.remove('hidden');
+          soundWave.classList.remove('hidden');
+          if (musicBadge) {
+            musicBadge.innerText = 'Sonando 🎵';
+            musicBadge.classList.remove('text-gray-500');
+            musicBadge.classList.add('text-baby-accent');
+          }
+        } else {
+          iconMuted.classList.remove('hidden');
+          iconPlaying.classList.add('hidden');
+          soundWave.classList.add('hidden');
+          if (musicBadge) {
+            musicBadge.innerText = 'Toca para Música 🎵';
+            musicBadge.classList.remove('text-baby-accent');
+            musicBadge.classList.add('text-gray-500');
+          }
+        }
+      }
+
+      async function playMusic() {
+        if (CONFIG.youtubeVideoId && ytPlayer && typeof ytPlayer.playVideo === 'function') {
+          ytPlayer.playVideo();
+          updateMusicUI(true);
+          return;
+        }
+
+        try {
+          if (!bgAudio.src || bgAudio.src === '') {
+            bgAudio.src = 'musica.mp3';
+          }
+          await bgAudio.play();
+          updateMusicUI(true);
+        } catch (err) {
+          console.warn('Reproducción en espera de interacción táctil:', err);
+        }
+      }
+
+      function pauseMusic() {
+        if (CONFIG.youtubeVideoId && ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+          ytPlayer.pauseVideo();
+        } else {
+          bgAudio.pause();
+        }
+        updateMusicUI(false);
+      }
+
+      // Clic directo en el botón flotante o en la etiqueta
+      async function toggleMusic(e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (isMusicPlaying) {
+          pauseMusic();
+        } else {
+          await playMusic();
+        }
+      }
+
+      musicToggleBtn.addEventListener('click', toggleMusic);
+      if (musicBadge) musicBadge.addEventListener('click', toggleMusic);
+
+      // Auto-iniciar música con el primer toque o interacción en cualquier parte de la pantalla
+      const touchEvents = ['pointerdown', 'touchstart', 'click', 'scroll', 'keydown'];
+      function autoStartMusicOnFirstGesture() {
+        if (!isMusicPlaying) {
+          playMusic();
+        }
+        touchEvents.forEach(evt => {
+          window.removeEventListener(evt, autoStartMusicOnFirstGesture, { passive: true });
+        });
+      }
+      touchEvents.forEach(evt => {
+        window.addEventListener(evt, autoStartMusicOnFirstGesture, { passive: true, once: true });
+      });
+
+      // Soporte Opcional para YouTube Iframe API si se especifica youtubeVideoId
+      if (CONFIG.youtubeVideoId) {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        window.onYouTubeIframeAPIReady = function () {
+          ytPlayer = new YT.Player('ytPlayer', {
+            height: '0',
+            width: '0',
+            videoId: CONFIG.youtubeVideoId,
+            playerVars: {
+              autoplay: 1,
+              loop: 1,
+              playlist: CONFIG.youtubeVideoId,
+              controls: 0,
+              showinfo: 0,
+              modestbranding: 1
+            },
+            events: {
+              onReady: function (event) {
+                // Listo para reproducir cuando haya interacción
+              }
+            }
+          });
+        };
+      }
+
+
+      /* ---------------------------------------------------- */
+      /* 2. MINIJUEGO ARCADE: ¡Ayuda a la cigüeña!            */
+      /* ---------------------------------------------------- */
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+      const gameContainer = document.getElementById('gameContainer');
+      const gameStartOverlay = document.getElementById('gameStartOverlay');
+      const gameWinOverlay = document.getElementById('gameWinOverlay');
+      const gameOverOverlay = document.getElementById('gameOverOverlay');
+      const gameOverScoreText = document.getElementById('gameOverScoreText');
+      const btnPlayAgain = document.getElementById('btnPlayAgain');
+      const btnRetry = document.getElementById('btnRetry');
+
+      // Elementos del formulario de ganador
+      const winnerFormBox = document.getElementById('winnerFormBox');
+      const winnerSuccessBox = document.getElementById('winnerSuccessBox');
+      const winnerNameInput = document.getElementById('winnerNameInput');
+      const btnSubmitWinner = document.getElementById('btnSubmitWinner');
+      const winnerFeedback = document.getElementById('winnerFeedback');
+
+      const TARGET_SCORE = 20; // 20 niveles para ganar tu premio
+      const GRAVITY = 0.28;
+      const JUMP = -5.4;
+      const BASE_PIPE_SPEED = 1.9;
+      const PIPE_SPAWN_INTERVAL = 115;
+      const PIPE_GAP = 145;
+
+      function getPipeSpeed(currentScore) {
+        return BASE_PIPE_SPEED + Math.min(1.2, currentScore * 0.05);
+      }
+
+      // Dibujo de rectángulo redondeado 100% compatible con todos los navegadores
+      function drawSafeRoundedRect(c, x, y, w, h, r) {
+        if (w <= 0 || h <= 0) return;
+        const radius = typeof r === 'number' ? r : (Array.isArray(r) ? r[0] || 6 : 6);
+        const safeR = Math.max(0, Math.min(radius, Math.abs(w) / 2, Math.abs(h) / 2));
+        c.beginPath();
+        c.moveTo(x + safeR, y);
+        c.lineTo(x + w - safeR, y);
+        c.quadraticCurveTo(x + w, y, x + w, y + safeR);
+        c.lineTo(x + w, y + h - safeR);
+        c.quadraticCurveTo(x + w, y + h, x + w - safeR, y + h);
+        c.lineTo(x + safeR, y + h);
+        c.quadraticCurveTo(x, y + h, x, y + h - safeR);
+        c.lineTo(x, y + safeR);
+        c.quadraticCurveTo(x, y, x + safeR, y);
+        c.closePath();
+      }
+
+      let gameState = 'START';
+      let animationFrameId = null;
+      let frameCount = 0;
+      let score = 0;
+
+      const stork = {
+        x: 65,
+        y: canvas.height / 2,
+        radius: 16,
+        velocity: 0,
+        wingAngle: 0,
+        reset() {
+          this.x = 65;
+          this.y = canvas.height / 2;
+          this.velocity = 0;
+          this.wingAngle = 0;
+        },
+        flap() {
+          this.velocity = JUMP;
+        },
+        update() {
+          this.velocity += GRAVITY;
+          this.y += this.velocity;
+          this.wingAngle += 0.2;
+        },
+        draw() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+
+          const tilt = Math.min(Math.PI / 4, Math.max(-Math.PI / 4, this.velocity * 0.08));
+          ctx.rotate(tilt);
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.ellipse(0, 0, 15, 11, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = '#FBCFE8';
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(10, -5, 8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#374151';
+          ctx.beginPath();
+          ctx.arc(12, -7, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#F97316';
+          ctx.beginPath();
+          ctx.moveTo(16, -6);
+          ctx.lineTo(27, -4);
+          ctx.lineTo(16, -2);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.fillStyle = '#FDF2F8';
+          ctx.beginPath();
+          const wingFlap = Math.sin(this.wingAngle) * 6;
+          ctx.ellipse(-3, -2 + wingFlap, 9, 6, 0.2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.save();
+          ctx.translate(23, -2);
+          ctx.strokeStyle = '#F472B6';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(-3, 14);
+          ctx.stroke();
+
+          ctx.fillStyle = '#F472B6';
+          ctx.beginPath();
+          ctx.arc(-3, 18, 7, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = '8px sans-serif';
+          ctx.fillText('❤', -6, 21);
+          ctx.restore();
+
+          ctx.restore();
+        }
+      };
+
+      let pipes = [];
+
+      function createPipe() {
+        const minHeight = 45;
+        const maxHeight = canvas.height - PIPE_GAP - minHeight;
+        const topHeight = Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
+        pipes.push({
+          x: canvas.width,
+          topHeight: topHeight,
+          bottomY: topHeight + PIPE_GAP,
+          passed: false
+        });
+      }
+
+      function drawBambooObstacle(x, y, width, height, isTop) {
+        ctx.save();
+        // Gradiente natural del bambú selvático
+        const grad = ctx.createLinearGradient(x, 0, x + width, 0);
+        grad.addColorStop(0, '#15803D');
+        grad.addColorStop(0.3, '#22C55E');
+        grad.addColorStop(0.7, '#4ADE80');
+        grad.addColorStop(1, '#166534');
+
+        ctx.fillStyle = grad;
+        ctx.strokeStyle = '#0B2C1C';
+        ctx.lineWidth = 1.5;
+
+        drawSafeRoundedRect(ctx, x, y, width, height, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        // Nudos y anillos del bambú
+        const ringSpacing = 32;
+        const startY = isTop ? 0 : y;
+        const endY = isTop ? y + height : canvas.height;
+
+        for (let ry = startY + 18; ry < endY - 14; ry += ringSpacing) {
+          ctx.fillStyle = '#14532D';
+          ctx.fillRect(x - 2, ry, width + 4, 3);
+          ctx.fillStyle = '#BBF7D0';
+          ctx.fillRect(x - 1, ry + 3, width + 2, 1.5);
+        }
+
+        // Nudo principal en la apertura del camino
+        const capY = isTop ? y + height - 8 : y;
+        ctx.fillStyle = '#15803D';
+        ctx.fillRect(x - 3, capY, width + 6, 8);
+        ctx.fillStyle = '#FEF08A';
+        ctx.fillRect(x - 2, capY + (isTop ? 6 : 1), width + 4, 2);
+
+        // Hoja verde tropical que brota del nudo
+        ctx.fillStyle = '#22C55E';
+        ctx.beginPath();
+        if (isTop) {
+          ctx.ellipse(x - 5, y + height - 4, 8, 4, -0.4, 0, Math.PI * 2);
+          ctx.ellipse(x + width + 5, y + height - 4, 8, 4, 0.4, 0, Math.PI * 2);
+        } else {
+          ctx.ellipse(x - 5, y + 4, 8, 4, 0.4, 0, Math.PI * 2);
+          ctx.ellipse(x + width + 5, y + 4, 8, 4, -0.4, 0, Math.PI * 2);
+        }
+        ctx.fill();
+
+        // Flor de hibisco rosa en el centro del nudo
+        const flowerY = isTop ? y + height - 4 : y + 4;
+        const flowerX = x + width / 2;
+        ctx.fillStyle = '#FB7185';
+        for (let a = 0; a < Math.PI * 2; a += Math.PI / 2.5) {
+          ctx.beginPath();
+          ctx.arc(flowerX + Math.cos(a) * 4, flowerY + Math.sin(a) * 4, 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.fillStyle = '#FDE047';
+        ctx.beginPath();
+        ctx.arc(flowerX, flowerY, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      function drawCanvasBackground() {
+        // Fondo del juego: Cielo tropical de El Libro de la Selva
+        const bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        bgGrad.addColorStop(0, '#FEF9C3'); // Sol cálido
+        bgGrad.addColorStop(0.35, '#E0F2FE'); // Cielo abierto
+        bgGrad.addColorStop(0.75, '#DCFCE7'); // Copa de los árboles
+        bgGrad.addColorStop(1, '#86EFAC'); // Suelo selvático
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Enredaderas colgantes en la parte superior
+        ctx.fillStyle = 'rgba(21, 128, 61, 0.28)';
+        for (let vi = 20; vi < canvas.width; vi += 40) {
+          ctx.beginPath();
+          ctx.arc(vi, 0, 16, 0, Math.PI);
+          ctx.fill();
+        }
+
+        // Pequeñas hojas decorativas flotando
+        ctx.fillStyle = 'rgba(34, 197, 94, 0.2)';
+        ctx.beginPath();
+        ctx.arc(50, 45, 5, 0, Math.PI * 2);
+        ctx.arc(280, 85, 4, 0, Math.PI * 2);
+        ctx.arc(150, 360, 6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function launchWinConfetti() {
+        if (typeof confetti === 'function') {
+          const count = 220;
+          const defaults = {
+            origin: { y: 0.6 },
+            colors: ['#F59E0B', '#22C55E', '#FB7185', '#FDE047', '#10B981', '#FFCAD4']
+          };
+
+          function fire(particleRatio, opts) {
+            confetti({
+              ...defaults,
+              ...opts,
+              particleCount: Math.floor(count * particleRatio)
+            });
+          }
+
+          fire(0.25, { spread: 26, startVelocity: 55 });
+          fire(0.2, { spread: 60 });
+          fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+          fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+          fire(0.1, { spread: 120, startVelocity: 45 });
+        }
+      }
+
+      function gameLoop() {
+        if (gameState !== 'PLAYING') return;
+
+        frameCount++;
+        drawCanvasBackground();
+
+        if (frameCount % PIPE_SPAWN_INTERVAL === 0) {
+          createPipe();
+        }
+
+        stork.update();
+        stork.draw();
+
+        // Si toca el techo, rebota suavemente sin morir
+        if (stork.y - stork.radius < 0) {
+          stork.y = stork.radius;
+          stork.velocity = 0;
+        }
+
+        // Si cae al suelo, finaliza el juego
+        if (stork.y + stork.radius >= canvas.height - 10) {
+          triggerGameOver();
+          return;
+        }
+
+        const currentSpeed = getPipeSpeed(score);
+
+        for (let i = pipes.length - 1; i >= 0; i--) {
+          const p = pipes[i];
+          p.x -= currentSpeed;
+
+          const pipeWidth = 48;
+
+          drawBambooObstacle(p.x, 0, pipeWidth, p.topHeight, true);
+          drawBambooObstacle(p.x, p.bottomY, pipeWidth, canvas.height - p.bottomY, false);
+
+          // Caja de colisión justa y suave
+          const storkBox = {
+            left: stork.x - 9,
+            right: stork.x + 11,
+            top: stork.y - 8,
+            bottom: stork.y + 12
+          };
+
+          const hitTop = storkBox.right > p.x && storkBox.left < p.x + pipeWidth && storkBox.top < p.topHeight;
+          const hitBottom = storkBox.right > p.x && storkBox.left < p.x + pipeWidth && storkBox.bottom > p.bottomY;
+
+          if (hitTop || hitBottom) {
+            triggerGameOver();
+            return;
+          }
+
+          if (!p.passed && p.x + pipeWidth < stork.x) {
+            p.passed = true;
+            score++;
+
+            if (score >= TARGET_SCORE) {
+              triggerWin();
+              return;
+            }
+          }
+
+          if (p.x + pipeWidth < -20) {
+            pipes.splice(i, 1);
+          }
+        }
+
+        drawInGameScore();
+        animationFrameId = requestAnimationFrame(gameLoop);
+      }
+
+      function drawInGameScore() {
+        ctx.save();
+        const badgeWidth = 120;
+        ctx.fillStyle = 'rgba(255, 253, 245, 0.92)';
+        drawSafeRoundedRect(ctx, canvas.width / 2 - badgeWidth / 2, 12, badgeWidth, 30, 15);
+        ctx.fill();
+        ctx.strokeStyle = '#F59E0B';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#051A10';
+        ctx.font = 'bold 14px Fredoka, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`Nivel: ${score} / ${TARGET_SCORE}`, canvas.width / 2, 27);
+        ctx.restore();
+      }
+
+      function startGame() {
+        pipes = [];
+        frameCount = 0;
+        score = 0;
+        stork.reset();
+        gameState = 'PLAYING';
+
+        gameStartOverlay.classList.add('hidden');
+        gameWinOverlay.classList.add('hidden');
+        gameOverOverlay.classList.add('hidden');
+
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        gameLoop();
+      }
+
+      function triggerWin() {
+        gameState = 'WON';
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        gameStartOverlay.classList.add('hidden');
+        gameOverOverlay.classList.add('hidden');
+        gameWinOverlay.classList.remove('hidden');
+
+        if (winnerFormBox) winnerFormBox.classList.remove('hidden');
+        if (winnerSuccessBox) winnerSuccessBox.classList.add('hidden');
+        if (winnerFeedback) winnerFeedback.classList.add('hidden');
+        if (winnerNameInput) winnerNameInput.value = '';
+        if (btnSubmitWinner) {
+          btnSubmitWinner.disabled = false;
+          btnSubmitWinner.innerHTML = `<span>¡Anotarme para mi Premio!</span> <span>🎁</span>`;
+        }
+
+        launchWinConfetti();
+      }
+
+      function triggerGameOver() {
+        gameState = 'GAMEOVER';
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        gameOverScoreText.innerText = `Nivel alcanzado: ${score} de ${TARGET_SCORE}`;
+        gameOverOverlay.classList.remove('hidden');
+      }
+
+      function handleAction(e) {
+        if (e && e.cancelable && e.type !== 'keydown') e.preventDefault();
+        playMusic();
+        if (gameState === 'START') {
+          startGame();
+          stork.flap();
+        } else if (gameState === 'PLAYING') {
+          stork.flap();
+        }
+      }
+
+      // Soporte táctil y ratón en Canvas, Overlay y Contenedor
+      canvas.addEventListener('pointerdown', handleAction);
+      gameStartOverlay.addEventListener('pointerdown', handleAction);
+      if (gameContainer) {
+        gameContainer.addEventListener('pointerdown', (e) => {
+          if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
+            handleAction(e);
+          }
+        });
+      }
+
+      btnPlayAgain.addEventListener('click', (e) => {
+        e.stopPropagation();
+        startGame();
+      });
+
+      btnRetry.addEventListener('click', (e) => {
+        e.stopPropagation();
+        startGame();
+      });
+
+      gameOverOverlay.addEventListener('pointerdown', (e) => {
+        if (e.target.tagName !== 'BUTTON') {
+          e.preventDefault();
+          startGame();
+        }
+      });
+
+      // Soporte para Teclado (Barra Espaciadora o Flecha Arriba)
+      window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' || e.code === 'ArrowUp' || e.key === ' ') {
+          const rect = canvas.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            e.preventDefault();
+            if (gameState === 'GAMEOVER') {
+              startGame();
+            } else {
+              handleAction(e);
+            }
+          }
+        }
+      });
+
+      function drawInitialScreen() {
+        drawCanvasBackground();
+        stork.draw();
+      }
+      drawInitialScreen();
+
+
+      /* ---------------------------------------------------- */
+      /* 3. BASE DE DATOS SUPABASE (Deseos y Ganadores)       */
+      /* ---------------------------------------------------- */
+      const SUPABASE_URL = CONFIG.supabaseUrl;
+      const SUPABASE_KEY = CONFIG.supabaseKey;
+
+      let supabaseClient = null;
+      const isSupabaseConfigured = SUPABASE_URL && SUPABASE_URL !== 'TU_URL' && SUPABASE_KEY && SUPABASE_KEY !== 'TU_KEY' && window.supabase;
+
+      if (isSupabaseConfigured) {
+        try {
+          supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        } catch (e) {
+          console.error('Error inicializando Supabase Client:', e);
+        }
+      }
+
+      /* --- REGISTRO DE GANADORES DEL MINIJUEGO --- */
+      async function submitWinner(nombre) {
+        if (isSupabaseConfigured && supabaseClient) {
+          const { data, error } = await supabaseClient
+            .from('ganadores')
+            .insert([{ nombre }]);
+          if (error) throw error;
+          return data;
+        } else {
+          throw new Error('Supabase no está conectado para registrar al ganador.');
+        }
+      }
+
+      btnSubmitWinner.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const nombre = winnerNameInput.value.trim();
+
+        if (!nombre) {
+          winnerFeedback.innerText = 'Por favor escribe tu nombre y apellido.';
+          winnerFeedback.classList.remove('hidden');
+          return;
+        }
+
+        winnerFeedback.classList.add('hidden');
+        btnSubmitWinner.disabled = true;
+        btnSubmitWinner.innerHTML = `
+          <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          <span>Guardando...</span>
+        `;
+
+        try {
+          await submitWinner(nombre);
+          winnerFormBox.classList.add('hidden');
+          winnerSuccessBox.classList.remove('hidden');
+          launchWinConfetti();
+        } catch (err) {
+          console.error('Error al registrar ganador en Supabase:', err);
+          winnerFeedback.innerText = 'No se pudo guardar en línea. Revisa la tabla ganadores.';
+          winnerFeedback.classList.remove('hidden');
+          btnSubmitWinner.disabled = false;
+          btnSubmitWinner.innerHTML = `<span>¡Anotarme para mi Premio!</span> <span>🎁</span>`;
+        }
+      });
+
+
+      /* --- COCHECITO DE LOS DESEOS (CARTAS FLOTANTES DE AMOR) --- */
+      const wishForm = document.getElementById('wishForm');
+      const userNameInput = document.getElementById('userNameInput');
+      const userMessageInput = document.getElementById('userMessageInput');
+      const btnSubmitWish = document.getElementById('btnSubmitWish');
+      const formFeedback = document.getElementById('formFeedback');
+
+      const spotlightLetterCard = document.getElementById('spotlightLetterCard');
+      const spotlightPaperSheet = document.getElementById('spotlightPaperSheet');
+      const spotlightAuthor = document.getElementById('spotlightAuthor');
+      const spotlightAvatar = document.getElementById('spotlightAvatar');
+      const spotlightDate = document.getElementById('spotlightDate');
+      const spotlightMessage = document.getElementById('spotlightMessage');
+      const wishCounterBadge = document.getElementById('wishCounterBadge');
+      const btnPrevWish = document.getElementById('btnPrevWish');
+      const btnNextWish = document.getElementById('btnNextWish');
+
+      const orbitBadges = [
+        { badge: document.getElementById('orbitBadge0'), name: document.getElementById('orbitName0') },
+        { badge: document.getElementById('orbitBadge1'), name: document.getElementById('orbitName1') },
+        { badge: document.getElementById('orbitBadge2'), name: document.getElementById('orbitName2') }
+      ];
+
+      let allWishes = [];
+      let currentWishIndex = 0;
+      let wishAutoCycleTimer = null;
+
+      function showFeedback(msg, isError = false) {
+        formFeedback.innerText = msg;
+        formFeedback.classList.remove('hidden', 'bg-red-50', 'text-red-600', 'border-red-200', 'bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
+        if (isError) {
+          formFeedback.classList.add('bg-red-50', 'text-red-600', 'border', 'border-red-200');
+        } else {
+          formFeedback.classList.add('bg-emerald-50', 'text-emerald-700', 'border', 'border-emerald-200');
+        }
+        setTimeout(() => {
+          formFeedback.classList.add('hidden');
+        }, 5000);
+      }
+
+      function updateSpotlightWish(index, animated = true) {
+        if (!allWishes || allWishes.length === 0) {
+          spotlightAuthor.innerText = "Esperando mensajes... 💌";
+          spotlightAvatar.innerText = "🎀";
+          spotlightDate.innerText = "Hoy";
+          spotlightMessage.innerText = '"Aún no hay dedicatorias escritas. ¡Sé el primero en dejarle una bendición a Claire en el formulario de abajo!"';
+          wishCounterBadge.innerText = "0 de 0";
+          orbitBadges.forEach(b => b.badge.classList.add('hidden'));
+          return;
+        }
+
+        currentWishIndex = (index + allWishes.length) % allWishes.length;
+        const w = allWishes[currentWishIndex];
+
+        // Animación de hoja flotando suavemente hacia el frente
+        if (animated) {
+          spotlightPaperSheet.classList.add('opacity-0', 'scale-95', '-translate-y-2');
+          setTimeout(() => {
+            renderWishContent(w);
+            spotlightPaperSheet.classList.remove('opacity-0', 'scale-95', '-translate-y-2');
+          }, 250);
+        } else {
+          renderWishContent(w);
+        }
+
+        // Actualizar nombres en las cartitas que orbitan alrededor del cochecito (solo de deseos reales)
+        orbitBadges.forEach((ob, i) => {
+          if (allWishes.length > 1 && i < allWishes.length - 1) {
+            const nextIdx = (currentWishIndex + i + 1) % allWishes.length;
+            const orbitWish = allWishes[nextIdx];
+            ob.name.innerText = orbitWish.nombre;
+            ob.badge.classList.remove('hidden');
+            ob.badge.onclick = () => {
+              updateSpotlightWish(nextIdx, true);
+              restartAutoCycle();
+            };
+          } else {
+            ob.badge.classList.add('hidden');
+          }
+        });
+      }
+
+      function renderWishContent(w) {
+        const initial = (w.nombre || 'A').trim().charAt(0).toUpperCase();
+        spotlightAvatar.innerText = initial;
+        spotlightAuthor.innerText = w.nombre || 'Anónimo';
+
+        const dateObj = w.created_at ? new Date(w.created_at) : new Date();
+        spotlightDate.innerText = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+        spotlightMessage.innerText = `"${w.mensaje}"`;
+        wishCounterBadge.innerText = `${currentWishIndex + 1} de ${allWishes.length}`;
+      }
+
+      function nextWish() {
+        updateSpotlightWish(currentWishIndex + 1, true);
+      }
+
+      function prevWish() {
+        updateSpotlightWish(currentWishIndex - 1, true);
+      }
+
+      function startAutoCycle() {
+        if (wishAutoCycleTimer) clearInterval(wishAutoCycleTimer);
+        wishAutoCycleTimer = setInterval(() => {
+          if (allWishes.length > 1) {
+            nextWish();
+          }
+        }, 5500);
+      }
+
+      function restartAutoCycle() {
+        startAutoCycle();
+      }
+
+      btnNextWish.addEventListener('click', (e) => {
+        e.preventDefault();
+        nextWish();
+        restartAutoCycle();
+      });
+
+      btnPrevWish.addEventListener('click', (e) => {
+        e.preventDefault();
+        prevWish();
+        restartAutoCycle();
+      });
+
+      spotlightLetterCard.addEventListener('mouseenter', () => clearInterval(wishAutoCycleTimer));
+      spotlightLetterCard.addEventListener('mouseleave', () => startAutoCycle());
+
+      function escapeHTML(str) {
+        if (!str) return '';
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      async function loadWishes() {
+        if (!isSupabaseConfigured || !supabaseClient) {
+          allWishes = [];
+          updateSpotlightWish(0, false);
+          return;
+        }
+
+        try {
+          const { data, error } = await supabaseClient
+            .from('deseos')
+            .select('*')
+            .order('id', { ascending: false });
+
+          if (error) {
+            console.error('Error al consultar deseos en Supabase:', error);
+            allWishes = [];
+          } else {
+            allWishes = data || [];
+          }
+          updateSpotlightWish(0, false);
+          if (allWishes.length > 1) startAutoCycle();
+        } catch (err) {
+          console.error('Error al consultar deseos en Supabase:', err);
+          allWishes = [];
+          updateSpotlightWish(0, false);
+        }
+      }
+
+      async function submitWish(nombre, mensaje) {
+        if (isSupabaseConfigured && supabaseClient) {
+          const { data, error } = await supabaseClient
+            .from('deseos')
+            .insert([{ nombre, mensaje }]);
+          if (error) throw error;
+          return data;
+        } else {
+          throw new Error('Supabase no está conectado para guardar el deseo.');
+        }
+      }
+
+      wishForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const nombre = userNameInput.value.trim();
+        const mensaje = userMessageInput.value.trim();
+
+        if (!nombre || !mensaje) {
+          showFeedback('Por favor ingresa tu nombre y un mensaje cariñoso.', true);
+          return;
+        }
+
+        btnSubmitWish.disabled = true;
+        btnSubmitWish.innerHTML = `
+          <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          <span>Enviando carta al cochecito...</span>
+        `;
+
+        try {
+          await submitWish(nombre, mensaje);
+          showFeedback('¡Tu carta está volando junto al cochecito de Claire! 💌✨');
+
+          const newLetter = {
+            id: Date.now(),
+            nombre,
+            mensaje,
+            created_at: new Date().toISOString()
+          };
+          allWishes.unshift(newLetter);
+          updateSpotlightWish(0, true);
+          restartAutoCycle();
+
+          userNameInput.value = '';
+          userMessageInput.value = '';
+          // El formulario se mantiene abierto para que otros invitados también puedan escribir
+          launchWinConfetti();
+        } catch (err) {
+          console.error('Error guardando deseo:', err);
+          showFeedback('Ocurrió un error al enviar tu carta. Intenta nuevamente.', true);
+        } finally {
+          btnSubmitWish.disabled = false;
+          btnSubmitWish.innerHTML = `
+            <span>Enviar Carta al Cochecito</span>
+            <span>🕊️💖</span>
+          `;
+        }
+      });
+
+      loadWishes();
+
+    })();
+  </script>
+</body>
+
+</html>
