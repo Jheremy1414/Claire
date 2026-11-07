@@ -464,7 +464,7 @@
       calendarStartDate: "20261107T200000Z", // 16:00 Bolivia (UTC-4) = 20:00 UTC
       calendarEndDate: "20261107T230000Z",
       calendarDetails: "¡Acompáñanos a celebrar el Baby Shower de Claire! Jheremy y Estefany te esperan con mucho amor en la fiesta temática del Libro de la Selva.",
-      calendarLocation: "Calle Pizarro 184",
+      calendarLocation: "Calle Pizarro 84",
 
       // 4. CÓMO LLEGAR (GOOGLE MAPS)
       mapsCoords: "-19.584523, -65.747328",
@@ -667,7 +667,9 @@
       <div class="flex flex-col gap-3.5 sm:gap-4">
 
         <!-- Botón A: Añadir a Google Calendar -->
-        <a id="btnCalendarLink" href="#" target="_blank" rel="noopener noreferrer"
+        <a id="btnCalendarLink"
+          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby%20Shower%20de%20Claire%20Borja%20Romero&dates=20261107T200000Z/20261107T230000Z&details=%C2%A1Acomp%C3%A1%C3%B1anos%20a%20celebrar%20el%20Baby%20Shower%20de%20Claire!%20Jheremy%20y%20Estefany%20te%20esperan%20con%20mucho%20amor%20en%20la%20fiesta%20tem%C3%A1tica%20del%20Libro%20de%20la%20Selva.&location=Calle%20Pizarro%2084"
+          target="_blank" rel="noopener noreferrer"
           class="group btn-bounce flex items-center justify-between w-full bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-800 hover:from-emerald-500 hover:to-teal-700 text-white font-title text-base sm:text-lg font-bold py-3.5 px-6 rounded-2xl border-2 border-amber-300 shadow-xl transition-all">
           <div class="flex items-center gap-3">
             <span
@@ -683,7 +685,9 @@
         </a>
 
         <!-- Botón B: Cómo llegar (Google Maps) -->
-        <a id="btnMapsLink" href="#" target="_blank" rel="noopener noreferrer"
+        <a id="btnMapsLink"
+          href="https://www.google.com/maps/dir/?api=1&destination=-19.584523,%20-65.747328"
+          target="_blank" rel="noopener noreferrer"
           class="group btn-bounce flex items-center justify-between w-full bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-white font-title text-base sm:text-lg font-bold py-3.5 px-6 rounded-2xl border-2 border-amber-300 shadow-xl transition-all">
           <div class="flex items-center gap-3">
             <span
@@ -702,7 +706,9 @@
         </a>
 
         <!-- Botón C: Confirmar Asistencia (WhatsApp Deep Link) -->
-        <a id="btnWhatsAppLink" href="#" target="_blank" rel="noopener noreferrer"
+        <a id="btnWhatsAppLink"
+          href="https://wa.me/59160467987?text=%C2%A1Hola%20Jheremy%20y%20Estefany!%20Confirmo%20mi%20asistencia%20al%20Baby%20Shower%20de%20Claire.%20%C2%A1Ah%C3%AD%20nos%20vemos%20con%20mucha%20alegr%C3%ADa!%20%F0%9F%A6%81%F0%9F%8D%BC%E2%9C%A8"
+          target="_blank" rel="noopener noreferrer"
           class="group btn-bounce flex items-center justify-between w-full bg-gradient-to-r from-green-500 via-emerald-600 to-green-700 hover:from-green-400 hover:to-emerald-500 text-white font-title text-base sm:text-lg font-bold py-3.5 px-6 rounded-2xl border-2 border-amber-300 shadow-xl transition-all">
           <div class="flex items-center gap-3">
             <span
@@ -953,7 +959,7 @@
 
         <!-- 3 Cartitas/Hojas en órbita con nombres de los invitados (Solo de Supabase) -->
         <div id="orbitBadge0" title="Toca para leer esta carta"
-          class="hidden cursor-pointer absolute top-3 left-2 sm:left-4 z-25 transition-all duration-500 animate-float hover:scale-110">
+          class="hidden cursor-pointer absolute top-3 left-2 sm:left-4 z-30 transition-all duration-500 animate-float hover:scale-110">
           <div
             class="bg-[#FFFDF5] text-emerald-950 text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-lg border-2 border-amber-300 flex items-center gap-1.5">
             <span class="text-xs">🌺</span>
@@ -962,7 +968,7 @@
         </div>
 
         <div id="orbitBadge1" title="Toca para leer esta carta"
-          class="hidden cursor-pointer absolute top-4 right-2 sm:right-4 z-25 transition-all duration-500 animate-float-delayed hover:scale-110">
+          class="hidden cursor-pointer absolute top-4 right-2 sm:right-4 z-30 transition-all duration-500 animate-float-delayed hover:scale-110">
           <div
             class="bg-[#FFFDF5] text-emerald-950 text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-lg border-2 border-amber-300 flex items-center gap-1.5">
             <span class="text-xs">🦁</span>
@@ -971,7 +977,7 @@
         </div>
 
         <div id="orbitBadge2" title="Toca para leer esta carta"
-          class="hidden cursor-pointer absolute bottom-14 right-2 sm:right-4 z-25 transition-all duration-500 animate-float hover:scale-110">
+          class="hidden cursor-pointer absolute bottom-14 right-2 sm:right-4 z-30 transition-all duration-500 animate-float hover:scale-110">
           <div
             class="bg-[#FFFDF5] text-emerald-950 text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-lg border-2 border-amber-300 flex items-center gap-1.5">
             <span class="text-xs">🌿</span>
@@ -1167,7 +1173,7 @@
         class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-950/60 border border-amber-400/40 backdrop-blur-sm mb-2 shadow-lg">
         <span>🦁</span>
         <span class="font-title text-sm font-bold text-amber-300">¡Te esperamos para celebrar a la pequeña
-          Claire!</span>
+          <span id="footerBabyName">Claire</span>!</span>
         <span>🎀</span>
       </div>
       <p class="font-medium text-amber-100/90 mb-1">
@@ -1190,12 +1196,21 @@
       /* ---------------------------------------------------- */
       /* A. INICIALIZAR DATOS DINÁMICOS DESDE CONFIG          */
       /* ---------------------------------------------------- */
-      document.getElementById('pageTitle').innerText = `¡Baby Shower de ${CONFIG.babyName}! 🍼✨`;
-      document.getElementById('heroBabyName').innerText = CONFIG.babyName;
-      document.getElementById('footerBabyName').innerText = CONFIG.babyName;
-      document.getElementById('heroSubtitle').innerText = CONFIG.eventSubtitle;
-      document.getElementById('heroDateDisplay').innerText = CONFIG.eventDateText;
-      document.getElementById('heroTimeDisplay').innerText = CONFIG.eventTimeText;
+      function safeSetText(id, text) {
+        const el = document.getElementById(id);
+        if (el) el.innerText = text;
+      }
+      function safeSetHref(id, href) {
+        const el = document.getElementById(id);
+        if (el) el.href = href;
+      }
+
+      safeSetText('pageTitle', `¡Baby Shower de ${CONFIG.babyName}! 🍼✨`);
+      safeSetText('heroBabyName', CONFIG.babyName);
+      safeSetText('footerBabyName', CONFIG.babyName);
+      safeSetText('heroSubtitle', CONFIG.eventSubtitle);
+      safeSetText('heroDateDisplay', CONFIG.eventDateText);
+      safeSetText('heroTimeDisplay', CONFIG.eventTimeText);
 
       // Configurar Enlace a Google Calendar
       const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE`
@@ -1203,15 +1218,15 @@
         + `&dates=${CONFIG.calendarStartDate}/${CONFIG.calendarEndDate}`
         + `&details=${encodeURIComponent(CONFIG.calendarDetails)}`
         + `&location=${encodeURIComponent(CONFIG.calendarLocation)}`;
-      document.getElementById('btnCalendarLink').href = calendarUrl;
+      safeSetHref('btnCalendarLink', calendarUrl);
 
       // Configurar Enlace a Google Maps
       const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(CONFIG.mapsCoords)}`;
-      document.getElementById('btnMapsLink').href = mapsUrl;
+      safeSetHref('btnMapsLink', mapsUrl);
 
       // Configurar Enlace a WhatsApp
       const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(CONFIG.whatsappMessage)}`;
-      document.getElementById('btnWhatsAppLink').href = waUrl;
+      safeSetHref('btnWhatsAppLink', waUrl);
 
       /* ---------------------------------------------------- */
       /* 1. MÚSICA DE FONDO (Garantizada Local & Online)      */
@@ -1306,18 +1321,20 @@
       musicToggleBtn.addEventListener('click', toggleMusic);
       if (musicBadge) musicBadge.addEventListener('click', toggleMusic);
 
-      // Auto-iniciar música con el primer toque o interacción en cualquier parte de la pantalla
-      const touchEvents = ['pointerdown', 'touchstart', 'click', 'scroll', 'keydown'];
-      function autoStartMusicOnFirstGesture() {
+      // Auto-iniciar música con la primera interacción del usuario en la pantalla
+      const gestureEvents = ['pointerdown', 'touchstart', 'click', 'keydown'];
+      function handleFirstUserGesture() {
         if (!isMusicPlaying) {
           playMusic();
         }
-        touchEvents.forEach(evt => {
-          window.removeEventListener(evt, autoStartMusicOnFirstGesture, { passive: true });
-        });
       }
-      touchEvents.forEach(evt => {
-        window.addEventListener(evt, autoStartMusicOnFirstGesture, { passive: true, once: true });
+      gestureEvents.forEach(evt => {
+        window.addEventListener(evt, handleFirstUserGesture, { passive: true });
+      });
+      bgAudio.addEventListener('play', () => {
+        gestureEvents.forEach(evt => {
+          window.removeEventListener(evt, handleFirstUserGesture, { passive: true });
+        });
       });
 
       // Soporte Opcional para YouTube Iframe API si se especifica youtubeVideoId
@@ -1748,7 +1765,10 @@
       }
 
       function handleAction(e) {
-        if (e && e.cancelable && e.type !== 'keydown') e.preventDefault();
+        if (e) {
+          if (e.cancelable && e.type !== 'keydown') e.preventDefault();
+          if (typeof e.stopPropagation === 'function') e.stopPropagation();
+        }
         playMusic();
         if (gameState === 'START') {
           startGame();
@@ -1758,22 +1778,17 @@
         }
       }
 
-      // Soporte táctil y ratón en Canvas, Overlay y Contenedor
+      // Soporte táctil y ratón en Canvas y Overlays
       canvas.addEventListener('pointerdown', handleAction);
       gameStartOverlay.addEventListener('pointerdown', handleAction);
-      if (gameContainer) {
-        gameContainer.addEventListener('pointerdown', (e) => {
-          if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
-            handleAction(e);
-          }
-        });
-      }
 
+      btnPlayAgain.addEventListener('pointerdown', (e) => e.stopPropagation());
       btnPlayAgain.addEventListener('click', (e) => {
         e.stopPropagation();
         startGame();
       });
 
+      btnRetry.addEventListener('pointerdown', (e) => e.stopPropagation());
       btnRetry.addEventListener('click', (e) => {
         e.stopPropagation();
         startGame();
@@ -1782,6 +1797,7 @@
       gameOverOverlay.addEventListener('pointerdown', (e) => {
         if (e.target.tagName !== 'BUTTON') {
           e.preventDefault();
+          e.stopPropagation();
           startGame();
         }
       });
@@ -2097,6 +2113,24 @@
       });
 
       loadWishes();
+
+      // Suscripción en tiempo real a nuevos deseos en Supabase
+      if (isSupabaseConfigured && supabaseClient) {
+        try {
+          supabaseClient
+            .channel('deseos_realtime')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'deseos' }, (payload) => {
+              if (payload.new && !allWishes.some(w => w.id === payload.new.id)) {
+                allWishes.unshift(payload.new);
+                updateSpotlightWish(0, true);
+                restartAutoCycle();
+              }
+            })
+            .subscribe();
+        } catch (err) {
+          console.warn('Realtime no disponible:', err);
+        }
+      }
 
     })();
   </script>
